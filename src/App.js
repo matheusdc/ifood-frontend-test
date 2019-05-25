@@ -1,8 +1,9 @@
 import React from 'react';
+import SessionManager from './components/SessionManager';
 
 const App = () => (
   <div>
-    Hello World
+    <SessionManager />
   </div>
 );
 
