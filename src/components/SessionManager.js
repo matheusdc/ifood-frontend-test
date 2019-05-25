@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import SpotifyLogin from './SpotifyLogin';
 
 import { getTokenFromUrl } from '../services/SpotifyAuthenticationService';
+import Home from '../pages/Home';
 
 class SessionManager extends Component {
   state = {
@@ -23,7 +24,7 @@ class SessionManager extends Component {
     return (
       <div>
         {this.isAuthenticated()
-          ? <span>Authentication sucessfull</span>
+          ? <Home />
           : <SpotifyLogin />
         }
       </div>
