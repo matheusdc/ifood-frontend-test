@@ -11,7 +11,7 @@ import 'antd/lib/row/style/css';
 
 import FeaturedPlaylistsProvider from '../components/FeaturedPlaylistsProvider';
 import Playlists from '../components/Playlists';
-import Filters from '../components/Filters';
+import Filters from '../components/Filters/Filters';
 
 const { Title } = Tipography;
 
