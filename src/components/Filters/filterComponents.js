@@ -9,31 +9,53 @@ import 'antd/lib/input-number/style/css';
 import DatePicker from 'antd/lib/date-picker';
 import 'antd/lib/date-picker/style/css';
 
+import Form from 'antd/lib/form';
+import 'antd/lib/form/style/css';
+
+import Col from 'antd/lib/col';
+import 'antd/lib/col/style/css';
+
+import Row from 'antd/lib/row';
+import 'antd/lib/row/style/css';
+
 import { setFilters } from '../../actions';
 
 const { Option } = Select;
+const { Item } = Form;
 
 const onChange = (id, value) => {
   setFilters({ [id]: value });
 };
 
 const SelectComponent = ({ id, name, values }) => (
-  <Select id={id} onChange={value => onChange(id, value)}>
-    {values.map(({ name, value }) => <Option value={value}>{name}</Option>)}
-  </Select>
+  <Col sm={24} xl={6} key={id}>
+    <Item label={name}>
+      <Select id={id} onChange={value => onChange(id, value)} style={{ width: '100%' }} placeholder={name}>
+        {values.map(({ name, value }) => <Option value={value}>{name}</Option>)}
+      </Select>
+    </Item>
+  </Col>
 );
 
 const InputNumberComponent = ({
   id, name,
 }) => (
-  <InputNumber id={id} onChange={value => onChange(id, value)} placeholder={name} />
-);
+    <Col sm={24} xl={6} key={id}>
+      <Item label={name}>
+        <InputNumber id={id} onChange={value => onChange(id, value)} placeholder={name} style={{ width: '100%' }} />
+      </Item>
+    </Col>
+  );
 
 const DatePickerComponent = ({
   id, name,
 }) => (
-  <DatePicker showTime onChange={value => onChange(id, value.toISOString())} id={id} placeholder={name} />
-);
+    <Col sm={24} xl={6} key={id}>
+      <Item label={name}>
+        <DatePicker showTime onChange={value => onChange(id, value.toISOString())} id={id} placeholder={name} style={{ width: '100%' }} />
+      </Item>
+    </Col>
+  );
 
 const createFilterComponent = (filter) => {
   const filterKeys = Object.keys(filter);
@@ -56,4 +78,8 @@ const createFilterComponent = (filter) => {
   return <div />; // TODO: throw error for unexpected component
 };
 
-export default filters => filters.map(createFilterComponent);
+export default filters => (
+  <Row gutter={8}>
+    {filters.map(createFilterComponent)}
+  </Row>
+);
