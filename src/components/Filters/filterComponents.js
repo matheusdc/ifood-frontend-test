@@ -9,10 +9,16 @@ import 'antd/lib/input-number/style/css';
 import DatePicker from 'antd/lib/date-picker';
 import 'antd/lib/date-picker/style/css';
 
+import { setFilters } from '../../actions';
+
 const { Option } = Select;
 
+const onChange = (id, value) => {
+  setFilters({ [id]: value });
+};
+
 const SelectComponent = ({ id, name, values }) => (
-  <Select id={id}>
+  <Select id={id} onChange={value => onChange(id, value)}>
     {values.map(({ name, value }) => <Option value={value}>{name}</Option>)}
   </Select>
 );
@@ -20,13 +26,13 @@ const SelectComponent = ({ id, name, values }) => (
 const InputNumberComponent = ({
   id, name,
 }) => (
-  <InputNumber id={id} placeholder={name} />
+  <InputNumber id={id} onChange={value => onChange(id, value)} placeholder={name} />
 );
 
 const DatePickerComponent = ({
   id, name,
 }) => (
-  <DatePicker showTime id={id} placeholder={name} />
+  <DatePicker showTime onChange={value => onChange(id, value.toISOString())} id={id} placeholder={name} />
 );
 
 const createFilterComponent = (filter) => {
@@ -36,7 +42,6 @@ const createFilterComponent = (filter) => {
   if (isSelectComponent) {
     return SelectComponent(filter);
   }
-
 
   const isDateComponent = filter.validation.primitiveType === 'STRING';
   if (isDateComponent) {

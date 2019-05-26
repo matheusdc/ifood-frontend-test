@@ -1,4 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Col from 'antd/lib/col';
 import 'antd/lib/col/style/css';
@@ -8,10 +10,12 @@ import 'antd/lib/row/style/css';
 
 import PlaylistCard from './PlaylistCard';
 
-import { FeaturedPlaylistContext } from './FeaturedPlaylistsProvider';
+import { getPlaylists } from '../actions';
 
-const Playlists = () => {
-  const { playlists } = useContext(FeaturedPlaylistContext);
+const Playlists = ({ playlists }) => {
+  useEffect(() => {
+    getPlaylists({ country: 'US' });
+  }, []);
 
   return (
     <Row gutter={24}>
@@ -31,4 +35,12 @@ const Playlists = () => {
   );
 };
 
-export default Playlists;
+Playlists.propTypes = {
+  playlists: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = ({ playlists }) => ({
+  playlists: playlists.playlists,
+});
+
+export default connect(mapStateToProps)(Playlists);

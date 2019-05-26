@@ -9,7 +9,6 @@ import 'antd/lib/col/style/css';
 import Row from 'antd/lib/row';
 import 'antd/lib/row/style/css';
 
-import FeaturedPlaylistsProvider from '../components/FeaturedPlaylistsProvider';
 import Playlists from '../components/Playlists';
 import Filters from '../components/Filters/Filters';
 
@@ -19,10 +18,10 @@ const Home = () => (
   <Row type="flex" justify="center">
     <Col span={18}>
       <Title level={1}>Spotifood</Title>
-      <FeaturedPlaylistsProvider>
+      <div>
         <Filters />
         <Playlists />
-      </FeaturedPlaylistsProvider>
+      </div>
     </Col>
   </Row>
 );

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Switch from 'antd/lib/switch';
 import 'antd/lib/switch/style/css';
@@ -9,11 +11,17 @@ import 'antd/lib/input/style/css';
 import { getFilters } from '../../services/FilterApi';
 import createFilterComponents from './filterComponents';
 
+import { getPlaylists } from '../../actions';
+
 const { Search } = Input;
 
-export default class Filters extends Component {
+class Filters extends Component {
+  static propTypes = {
+    filters: PropTypes.object.isRequired,
+  }
+
   state = {
-    filters: [],
+    filterFields: [],
     advancedSearch: false,
     loadingAdvancedFilters: true,
   }
@@ -21,11 +29,13 @@ export default class Filters extends Component {
   async componentDidMount() {
     const { data: { filters } } = await getFilters();
 
-    this.setState({ filters, loadingAdvancedFilters: false });
+    this.setState({ filterFields: filters, loadingAdvancedFilters: false });
   }
 
   render() {
-    const { filters, loadingAdvancedFilters, advancedSearch } = this.state;
+    const { filterFields, loadingAdvancedFilters, advancedSearch } = this.state;
+    const { filters } = this.props;
+    console.log(filters);
 
     return (
       <div>
@@ -41,8 +51,15 @@ export default class Filters extends Component {
           />
           Advanced Filters
         </div>
-        {advancedSearch && createFilterComponents(filters)}
+        {advancedSearch && createFilterComponents(filterFields)}
+        <button type="button" onClick={() => getPlaylists(filters)}>search</button>
       </div>
     );
   }
 }
+
+const mapStateToProps = ({ filters }) => ({
+  filters,
+});
+
+export default connect(mapStateToProps)(Filters);
