@@ -1,35 +1,27 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import SpotifyLogin from './SpotifyLogin';
 
 import { getTokenFromUrl } from '../services/SpotifyAuthenticationService';
 import Home from '../pages/Home';
 
-class SessionManager extends Component {
-  state = {
-    token: null,
-  }
+const SessionManager = () => {
+  const [token, setToken] = useState(null);
 
-  componentDidMount() {
-    const token = getTokenFromUrl();
-    this.setState({ token });
-  }
+  useEffect(() => {
+    setToken(getTokenFromUrl());
+  }, []);
 
-  isAuthenticated = () => {
-    const { token } = this.state;
-    return token !== null;
-  };
+  const isAuthenticated = () => token !== null;
 
-  render() {
-    return (
-      <div>
-        {this.isAuthenticated()
-          ? <Home />
-          : <SpotifyLogin />
-        }
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      {isAuthenticated()
+        ? <Home />
+        : <SpotifyLogin />
+      }
+    </div>
+  );
+};
 
 export default SessionManager;
