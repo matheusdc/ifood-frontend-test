@@ -1,32 +1,29 @@
 import React, { Component } from 'react';
 
-import Switch from 'antd/lib/switch';
-import 'antd/lib/switch/style/css';
-
 import Input from 'antd/lib/input';
 import 'antd/lib/input/style/css';
 
-import Col from 'antd/lib/col';
-import 'antd/lib/col/style/css';
-
-import Row from 'antd/lib/row';
-import 'antd/lib/row/style/css';
+import Collapse from 'antd/lib/collapse';
+import 'antd/lib/collapse/style/css';
 
 import Form from 'antd/lib/form';
 import 'antd/lib/form/style/css';
 
-import { getFilters } from '../../services/FilterApi';
-import createFilterComponents from './filterComponents';
+import Spin from 'antd/lib/spin';
+import 'antd/lib/spin/style/css';
 
-import { getPlaylists } from '../../actions';
+import { getFilters } from '../../services/FilterApi';
+import DynamicFilters from './DynamicFilters';
+
+import { setFilters } from '../../actions';
 
 const { Search } = Input;
 const { Item } = Form;
+const { Panel } = Collapse;
 
 class Filters extends Component {
   state = {
     filterFields: [],
-    advancedSearch: false,
     loadingAdvancedFilters: true,
   }
 
@@ -37,30 +34,26 @@ class Filters extends Component {
   }
 
   render() {
-    const { filterFields, loadingAdvancedFilters, advancedSearch } = this.state;
+    const { filterFields, loadingAdvancedFilters } = this.state;
 
     return (
       <div>
-        <Row gutter={8}>
-          <Col sm={24} xl={18}>
-            <Item label="Search">
-              <Search
-                placeholder="input search text"
-                onSearch={value => console.log(value)}
-                enterButton
-              />
-            </Item>
-          </Col>
-          <Col sm={24} xl={6}>
-            <Item label="Advanced Filters">
-              <Switch
-                loading={loadingAdvancedFilters}
-                onChange={() => this.setState({ advancedSearch: !advancedSearch })}
-              />
-            </Item>
-          </Col>
-        </Row>
-        {advancedSearch && createFilterComponents(filterFields)}
+        <Item label="Buscar playlists">
+          <Search
+            id="search"
+            size="large"
+            placeholder="Busque suas playlists aqui!"
+            onChange={event => setFilters({ keyword: event.target.value })}
+          />
+        </Item>
+
+        <Spin spinning={loadingAdvancedFilters} style={{ height: 50 }}>
+          <Collapse bordered={false}>
+            <Panel header="Filtros Avançados" key="1">
+              <DynamicFilters filterFields={filterFields} />
+            </Panel>
+          </Collapse>
+        </Spin>
       </div>
     );
   }

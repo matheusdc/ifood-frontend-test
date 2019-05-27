@@ -7,6 +7,8 @@ const defaultFilters = () => {
     locale,
     country,
     timestamp,
+    offset: 0,
+    limit: 9,
   };
 };
 

@@ -17,7 +17,7 @@ const { Title } = Tipography;
 const Home = () => (
   <Row type="flex" justify="center">
     <Col span={18}>
-      <Title level={1}>Spotifood</Title>
+      <Title style={{ marginTop: 48, fontSize: '3.7rem' }}>Spotifood</Title>
       <div>
         <Filters />
         <Playlists />

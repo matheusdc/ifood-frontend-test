@@ -9,12 +9,15 @@ import defaultFilters from '../components/defaultFilters';
 
 export function* workerGetPlaylists() {
   try {
-    const advancedFilters = yield select(state => state.filters);
+    const { keyword, ...filters } = yield select(state => state.filters);
 
-    const hasFilters = Object.keys(advancedFilters).length;
-    const filters = (hasFilters) ? advancedFilters : defaultFilters();
+    const hasFilters = Object.keys(filters).length;
+    if (!hasFilters) {
+      yield put({ type: TYPES.SET_FILTERS, payload: defaultFilters() });
+    }
 
     const { data: { playlists } } = yield call(getPlaylists, filters);
+
     yield put({ type: TYPES.GET_PLAYLISTS_SUCCESS, payload: playlists });
   } catch (error) {
     yield put({ type: TYPES.GET_PLAYLISTS_FAILURE });

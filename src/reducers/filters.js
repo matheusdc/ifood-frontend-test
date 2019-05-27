@@ -1,6 +1,7 @@
 import * as TYPES from '../actions/types';
 
 const INITIAL_STATE = {
+  keyword: '',
 };
 
 const filters = (state = INITIAL_STATE, { type, payload }) => {
