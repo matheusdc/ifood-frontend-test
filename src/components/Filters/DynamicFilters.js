@@ -32,26 +32,32 @@ const DynamicFilters = ({ filters, filterFields }) => {
     setFilters({ [id]: value });
   };
 
-  const SelectComponent = ({ id, name, values }) => (
-    <Col sm={24} xl={6} key={id}>
-      <Item label={name}>
-        <Select
-          id={id}
-          onChange={value => onChange(id, value)}
-          value={filters[id]}
-          style={{ width: '100%' }}
-          placeholder={name}
-        >
-          {values.map(({ name, value }) => <Option key={name} value={value}>{name}</Option>)}
-        </Select>
-      </Item>
-    </Col>
-  );
+  const SelectComponent = ({
+    // eslint-disable-next-line react/prop-types
+    id, name, values,
+  }) => (
+      <Col sm={24} xl={6} key={id}>
+        <Item label={name}>
+          <Select
+            id={id}
+            onChange={value => onChange(id, value)}
+            value={filters[id]}
+            style={{ width: '100%' }}
+            placeholder={name}
+          >
+            {values.map(({ name: optionName, value }) => (
+              <Option key={optionName} value={value}>{optionName}</Option>
+            ))}
+          </Select>
+        </Item>
+      </Col>
+    );
 
   const InputNumberComponent = ({
+    // eslint-disable-next-line react/prop-types
     id, name, validation: { min, max },
   }) => (
-    <Col sm={24} xl={6} key={id}>
+      <Col sm={24} xl={6} key={id}>
         <Item label={name}>
           <InputNumber
             id={id}
@@ -64,12 +70,13 @@ const DynamicFilters = ({ filters, filterFields }) => {
           />
         </Item>
       </Col>
-  );
+    );
 
   const DatePickerComponent = ({
+    // eslint-disable-next-line react/prop-types
     id, name,
   }) => (
-    <Col sm={24} xl={6} key={id}>
+      <Col sm={24} xl={6} key={id}>
         <Item label={name}>
           <DatePicker
             id={id}
@@ -81,7 +88,7 @@ const DynamicFilters = ({ filters, filterFields }) => {
           />
         </Item>
       </Col>
-  );
+    );
 
   const createFilterComponent = (filter) => {
     const filterKeys = Object.keys(filter);
@@ -91,7 +98,10 @@ const DynamicFilters = ({ filters, filterFields }) => {
       return SelectComponent(filter);
     }
 
-    const isDateComponent = filter.validation.primitiveType === 'STRING';
+    const isDateComponent = (
+      filter.validation.primitiveType === 'STRING'
+      && filter.validation.entityType === 'DATE_TIME'
+    );
     if (isDateComponent) {
       return DatePickerComponent(filter);
     }

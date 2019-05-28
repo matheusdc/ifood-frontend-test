@@ -43,14 +43,14 @@ const Playlists = ({
           id, name, images, tracks, external_urls: externalUrls,
         }) => (
           <Col key={id} xs={24} xl={8}>
-              <PlaylistCard
-                id={id}
-                name={name}
-                image={images[0].url}
-                tracks={tracks.total}
-                link={externalUrls.spotify}
-              />
-            </Col>
+            <PlaylistCard
+              id={id}
+              name={name}
+              image={images[0].url}
+              tracks={tracks.total}
+              link={externalUrls.spotify}
+            />
+          </Col>
         ))}
       </Row>
     </Spin>
