@@ -42,14 +42,14 @@ const DynamicFilters = ({ filters, filterFields }) => {
           style={{ width: '100%' }}
           placeholder={name}
         >
-          {values.map(({ name, value }) => <Option value={value}>{name}</Option>)}
+          {values.map(({ name, value }) => <Option key={name} value={value}>{name}</Option>)}
         </Select>
       </Item>
     </Col>
   );
 
   const InputNumberComponent = ({
-    id, name, min, max,
+    id, name, validation: { min, max },
   }) => (
     <Col sm={24} xl={6} key={id}>
         <Item label={name}>
@@ -101,7 +101,7 @@ const DynamicFilters = ({ filters, filterFields }) => {
       return InputNumberComponent(filter);
     }
 
-    return <div />; // TODO: throw error for unexpected component
+    return null;
   };
 
   return (
