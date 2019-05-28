@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Input from 'antd/lib/input';
 import 'antd/lib/input/style/css';
@@ -21,43 +21,38 @@ const { Search } = Input;
 const { Item } = Form;
 const { Panel } = Collapse;
 
-class Filters extends Component {
-  state = {
-    filterFields: [],
-    loadingAdvancedFilters: true,
-  }
+const Filters = () => {
+  const [filterFields, setFilterFields] = useState([]);
+  const [loadingAdvancedFilters, setLoadingAdvancedFilters] = useState(true);
 
-  async componentDidMount() {
-    const { data: { filters } } = await getFilters();
+  useEffect(() => {
+    getFilters().then(({ data: { filters } }) => {
+      setLoadingAdvancedFilters(false);
+      setFilterFields(filters);
+    });
+  }, []);
 
-    this.setState({ filterFields: filters, loadingAdvancedFilters: false });
-  }
+  return (
+    <div>
+      <Item label="Buscar playlists">
+        <Search
+          id="search"
+          size="large"
+          placeholder="Busque suas playlists aqui!"
+          onChange={event => setFilters({ keyword: event.target.value })}
+        />
+      </Item>
 
-  render() {
-    const { filterFields, loadingAdvancedFilters } = this.state;
-
-    return (
-      <div>
-        <Item label="Buscar playlists">
-          <Search
-            id="search"
-            size="large"
-            placeholder="Busque suas playlists aqui!"
-            onChange={event => setFilters({ keyword: event.target.value })}
-          />
-        </Item>
-
-        <Spin spinning={loadingAdvancedFilters} style={{ height: 50 }}>
-          <Collapse bordered={false}>
-            <Panel header="Filtros Avançados" key="1">
-              <DynamicFilters filterFields={filterFields} />
-            </Panel>
-          </Collapse>
-        </Spin>
-      </div>
-    );
-  }
-}
+      <Spin spinning={loadingAdvancedFilters} style={{ height: 50 }}>
+        <Collapse bordered={false}>
+          <Panel header="Filtros Avançados">
+            <DynamicFilters filterFields={filterFields} />
+          </Panel>
+        </Collapse>
+      </Spin>
+    </div>
+  );
+};
 
 
 export default Filters;
