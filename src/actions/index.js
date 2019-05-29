@@ -1,7 +1,7 @@
 import store from '../store';
 import * as TYPES from './types';
 
-const action = (type, payload) => store.dispatch({ type, payload });
+export const action = (type, payload) => store.dispatch({ type, payload });
 
 export const getPlaylists = params => action(TYPES.GET_PLAYLISTS_REQUEST, params);
 

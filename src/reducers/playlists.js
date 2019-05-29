@@ -1,6 +1,6 @@
 import * as TYPES from '../actions/types';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   loading: true,
   error: false,
   playlists: [],
