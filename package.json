@@ -2,6 +2,7 @@
   "name": "ifood-frontend-test",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://matheusdc.github.io/ifood-frontend-test",
   "dependencies": {
     "antd": "^3.18.2",
     "axios": "^0.18.0",
