@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://www.mocky.io/v2/5a25fade2e0000213aa90776';
+import { FILTER_API_BASE_URL } from '../constants';
 
 const FilterApi = axios.create({
-  baseURL: BASE_URL,
+  baseURL: FILTER_API_BASE_URL,
 });
 
 export const getFilters = () => FilterApi.get('/');

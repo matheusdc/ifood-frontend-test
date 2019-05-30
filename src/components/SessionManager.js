@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-import SpotifyLogin from './SpotifyLogin';
-
 import { getTokenFromUrl } from '../services/SpotifyAuthenticationService';
+
 import Home from '../pages/Home';
+import Login from '../pages/Login';
 
 const SessionManager = () => {
   const [token, setToken] = useState(null);
@@ -18,7 +18,7 @@ const SessionManager = () => {
     <div>
       {isAuthenticated()
         ? <Home />
-        : <SpotifyLogin />
+        : <Login />
       }
     </div>
   );

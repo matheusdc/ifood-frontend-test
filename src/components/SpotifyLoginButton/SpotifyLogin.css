@@ -1,0 +1,25 @@
+.spotify-login {
+  width: 16rem;
+  height: 3rem;
+  line-height: 3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
+  
+  background-color: #1DB954;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.spotify-login:hover {
+  color: white;
+  background-color: #2EC963
+}
+
+.spotify-login__logo {
+  height: 2.2rem;
+  margin-left: .5rem;
+}

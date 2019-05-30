@@ -12,16 +12,16 @@ const PlaylistCard = ({
   tracks,
   link,
 }) => (
-  <a href={link}>
-    <Card
-      hoverable
-      style={{ marginTop: 24 }}
-      cover={<img alt={name} src={image} />}
-    >
-      <Meta title={name} description={`${tracks} tracks.`} />
-    </Card>
-  </a>
-);
+    <a href={link}>
+      <Card
+        hoverable
+        style={{ marginTop: 24 }}
+        cover={<img alt={name} src={image} />}
+      >
+        <Meta title={name} description={`${tracks} músicas`} />
+      </Card>
+    </a>
+  );
 
 PlaylistCard.propTypes = {
   name: PropTypes.string.isRequired,

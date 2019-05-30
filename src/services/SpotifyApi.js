@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://api.spotify.com';
+import { SPOTIFY_API_BASE_URL } from '../constants';
 
 const SpotifyApi = axios.create({
-  baseURL: BASE_URL,
+  baseURL: SPOTIFY_API_BASE_URL,
 });
 
 const authorizationSetup = (config) => {

@@ -1,8 +1,10 @@
 import qs from 'qs';
 
-const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
-const CLIENT_ID = '97171a26d01b437680f71fd7a67a0af4';
-const REDIRECT_URI = 'http://localhost:3000';
+import {
+  AUTH_ENDPOINT,
+  CLIENT_ID,
+  REDIRECT_URI,
+} from '../constants';
 
 export const getTokenFromUrl = () => {
   const authCredentials = qs.parse(window.location.hash.substr(1));
@@ -15,8 +17,3 @@ export const getTokenFromUrl = () => {
 };
 
 export const getAuthUrl = () => `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=token&show_dialog=true`;
-
-export default {
-  getTokenFromUrl,
-  getAuthUrl,
-};

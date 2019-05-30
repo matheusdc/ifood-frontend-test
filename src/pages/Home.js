@@ -10,7 +10,7 @@ import Row from 'antd/lib/row';
 import 'antd/lib/row/style/css';
 
 import Playlists from '../components/Playlists';
-import Filters from '../components/Filters/Filters';
+import Filters from '../components/Filters';
 
 const { Title } = Tipography;
 
