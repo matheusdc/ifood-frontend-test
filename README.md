@@ -37,7 +37,9 @@ O boilerplate inicial foi criado a partir do comando `create-react-app`. Abaixo 
   * Permite a fácil criação de serviços e também suporta middlewares
 * Continuous Integration: Travis CI
   * Se integra facilmente com Github Pages
-* Coding Standard: Airbnb
+* Coding Standard Javascript: Airbnb
+* Coding Standard CSS: [BEM](http://getbem.com/introduction/)
+  * Foi utilizado CSS puro (sem pré-processadores) por simplicidade, já que a maioria dos compoentes vem da biblioteca do Ant Design e são configurados via prop `style`.
 * A aplicação utiliza as informações do Browser do usuário como default para carregar as primeiras playlists
   * O `locale` do browser é fornecido para a API de busca e a hora atual é fornecida como `timestamp`.
 
