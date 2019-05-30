@@ -31,7 +31,7 @@ O boilerplate inicial foi criado a partir do comando `create-react-app`. Abaixo 
 * UI Framework: [Ant Design](https://ant.design/)
   * Biblioteca bem completa com diversos componentes, grid system, etc. 
 * State Management: Redux/Redux-Saga
-  * As playlists e filtros são salvas no Redux, e as chamadas asincronas são feitas pelo middleware Saga
+  * As playlists e filtros são salvas no Redux, e as chamadas assíncronas são feitas pelo middleware Saga
 * Testes unitários: Jest
 * Chamadas para API: Axios
   * Permite a fácil criação de serviços e também suporta middlewares
@@ -46,7 +46,9 @@ O boilerplate inicial foi criado a partir do comando `create-react-app`. Abaixo 
 ## Bugs/Problemas conhecidos
 * O framework de UI Ant Desing apresenta alguns problemas com acessibilidade e acabou não sendo uma boa escolha, outras alternativas como *Bootstrap* ou *Lightning Design System* tem um suporte melhor a acessibilidade. Fonte: https://darekkay.com/blog/accessible-ui-frameworks/
 
-* A aplicação não valida se os valores de `locale` extraidos do browser são válidos de acordo com a API de filtros. 
+* A aplicação não valida se os valores de `locale` extraídos do browser são válidos de acordo com a API de filtros. 
+
+* O token de autenticação é salvo na Session Storage, dessa forma quando a aplicação é recarregada, é necessário autenticar novamente. Para persistir a autenticação, o token deveria ser salvo no Local Storage e ser recuperado ao carregar a página.
 
 * A aplicação deveria possuir mais testes, apenas os reducers estão sendos testados atualmente por simplicidade.
 
