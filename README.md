@@ -1,29 +1,53 @@
-# iFood Frontend Test
+# iFood Frontend Test [![Build Status](https://travis-ci.org/matheusdc/ifood-frontend-test.svg?branch=master)](https://travis-ci.org/matheusdc/ifood-frontend-test) 
 
-Create a web application called Spotifood used to display the preferred playlists from iFood's customers. The web application has only one page:
-* A page that lists the featured playlists at Spotify according to some criteria.
+## Sobre o projeto
 
-## Business rules
+O projeto está hospedado no Github Pages, com o deploy automátizado através Travis CI e pode ser acessado [aqui](https://matheusdc.github.io/ifood-frontend-test).
 
-* The page is composed of two components:
-    * One list of featured playlists
-    * One filter component with API filter fields and one local search text input to filter the playlists by "name".
-    
-* The filter component should be used to filter the elements displayed by the list of featured playlists.
-* The API filter fields and their possible values/type should be mounted by consuming this API **[1. Playlists Filters]** (http://www.mocky.io/v2/5a25fade2e0000213aa90776)
-* The featured playlists to be displayed should be consumed from this API **[2. See the documentation from Spotify]** (https://developer.spotify.com/web-api/get-list-featured-playlists/)
-* Every time the user change any information on the filter component, the list should be refresh accordingly. In case of API filter field change you should recall the playlists API with the filter parameters every time.
-* Considering that we live in a chaotic and fast-changing world, the page should refresh its content every 30 seconds, to see if any information from the Spotify APIs had been changed.
+## Ambiente de desenvolvimento
 
-## Hints or Constraints
+O projeto utiliza variáveis de ambiente com algumas configurações necessárias que são enviadas para a API de autenticação do Spotify. Crie um arquivo `.env.local` com as seguintes variáveis de ambiente:
+```
+REACT_APP_SPOTIFY_CLIENT_ID=
+REACT_APP_REDIRECT_URL=
+```
 
-We will use one API from Spotify Web API. You should follow the Spotify guide in order to create a token needed to access Spotify's API.
-To mount the API filter fields on the filter component, you **must** consume the API that provides the metadata about the fields (Link 1).
-You could use Material UI, Bootstrap or any other toolkit to accelerate your resolution. We will not provide any UI prototype or design.
+Em seguida execute os comandos abaixo, para instalar as dependências e rodar o projeto:
+```
+npm install
+npm start
+```
 
-## Non functional requirements
+O projeto pode ser acessado pela seguinte URL:
+```
+http://localhost:3000
+```
 
-As this application will be a worldwide success, it must be prepared to be accessible, responsive, fault tolerant and resilient.
-We **strongly recommend** using React to build the application.
-Also, briefly elaborate on your solution architecture details, choice of patterns and frameworks.
-Fork this repository and submit your code.
+## Detalhes do projeto
+
+O boilerplate inicial foi criado a partir do comando `create-react-app`. Abaixo um resumo das tecnologias utilizadas:
+
+* Componentes React utilizando Hooks
+* UI Framework: [Ant Design](https://ant.design/)
+  * Biblioteca bem completa com diversos componentes, grid system, etc. 
+* State Management: Redux/Redux-Saga
+  * As playlists e filtros são salvas no Redux, e as chamadas asincronas são feitas pelo middleware Saga
+* Testes unitários: Jest
+* Chamadas para API: Axios
+  * Permite a fácil criação de serviços e também suporta middlewares
+* Continuous Integration: Travis CI
+  * Se integra facilmente com Github Pages
+* Coding Standard: Airbnb
+* A aplicação utiliza as informações do Browser do usuário como default para carregar as primeiras playlists
+  * O `locale` do browser é fornecido para a API de busca e a hora atual é fornecida como `timestamp`.
+
+## Bugs/Problemas conhecidos
+* O framework de UI Ant Desing apresenta alguns problemas com acessibilidade e acabou não sendo uma boa escolha, outras alternativas como *Bootstrap* ou *Lightning Design System* tem um suporte melhor a acessibilidade. Fonte: https://darekkay.com/blog/accessible-ui-frameworks/
+
+* A aplicação não valida se os valores de `locale` extraidos do browser são válidos de acordo com a API de filtros. 
+
+* A aplicação deveria possuir mais testes, apenas os reducers estão sendos testados atualmente por simplicidade.
+
+* Skeleton UI poderia ser utilizada para melhorar a experiência do usuário e diminuir a sensação de tempo do carregamento da página.
+
+* Um componente de páginação poderia ter sido utilizado para melhorar a experiência do usuário.
