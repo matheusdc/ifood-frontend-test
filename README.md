@@ -2,7 +2,7 @@
 
 ## Sobre o projeto
 
-O projeto está hospedado no Github Pages, com o deploy automátizado através Travis CI e pode ser acessado [aqui](https://matheusdc.github.io/ifood-frontend-test).
+O projeto está hospedado no [Github Pages](https://matheusdc.github.io/ifood-frontend-test), com o deploy automatizado através Travis CI.
 
 ## Ambiente de desenvolvimento
 
