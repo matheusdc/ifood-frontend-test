@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/ifood-frontend-test/static/css/main.c1efd232.chunk.css",
+    "main.js": "/ifood-frontend-test/static/js/main.16cbe50a.chunk.js",
+    "main.js.map": "/ifood-frontend-test/static/js/main.16cbe50a.chunk.js.map",
+    "runtime~main.js": "/ifood-frontend-test/static/js/runtime~main.1301fedf.js",
+    "runtime~main.js.map": "/ifood-frontend-test/static/js/runtime~main.1301fedf.js.map",
+    "static/css/2.fd4afd7e.chunk.css": "/ifood-frontend-test/static/css/2.fd4afd7e.chunk.css",
+    "static/js/2.b1cc1f9d.chunk.js": "/ifood-frontend-test/static/js/2.b1cc1f9d.chunk.js",
+    "static/js/2.b1cc1f9d.chunk.js.map": "/ifood-frontend-test/static/js/2.b1cc1f9d.chunk.js.map",
+    "index.html": "/ifood-frontend-test/index.html",
+    "precache-manifest.1de2ee90b396e3677c1dd74d3e8c8e90.js": "/ifood-frontend-test/precache-manifest.1de2ee90b396e3677c1dd74d3e8c8e90.js",
+    "service-worker.js": "/ifood-frontend-test/service-worker.js",
+    "static/css/2.fd4afd7e.chunk.css.map": "/ifood-frontend-test/static/css/2.fd4afd7e.chunk.css.map",
+    "static/css/main.c1efd232.chunk.css.map": "/ifood-frontend-test/static/css/main.c1efd232.chunk.css.map",
+    "static/media/spotifyLogo.png": "/ifood-frontend-test/static/media/spotifyLogo.31bad8d4.png"
+  }
+}
