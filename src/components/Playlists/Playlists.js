@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -16,16 +16,15 @@ import 'antd/lib/spin/style/css';
 
 import PlaylistCard from './PlaylistCard';
 
-import { getPlaylists } from '../actions';
+import { playlistsFilterSelector } from '../../selectors/selectors';
 
-import { playlistsFilterSelector } from '../selectors/selectors';
+
+import usePlaylistPolling from './usePlaylistPolling';
 
 const Playlists = ({
   playlists, loading, error,
 }) => {
-  useEffect(() => {
-    getPlaylists();
-  }, []);
+  usePlaylistPolling();
 
   return (
     <Spin tip="Carregando..." spinning={loading} style={{ height: 150 }}>
