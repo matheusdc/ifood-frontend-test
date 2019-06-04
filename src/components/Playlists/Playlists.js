@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -16,16 +16,15 @@ import 'antd/lib/spin/style/css';
 
 import PlaylistCard from './PlaylistCard';
 
-import { getPlaylists } from '../actions';
+import { playlistsFilterSelector } from '../../selectors/selectors';
+
+
+import usePlaylistPolling from './usePlaylistPolling';
 
 const Playlists = ({
-  playlists, keyword, loading, error,
+  playlists, loading, error,
 }) => {
-  useEffect(() => {
-    getPlaylists();
-  }, []);
-
-  const filterPlaylistByKeyword = playlist => playlist.name.toLocaleLowerCase().includes(keyword);
+  usePlaylistPolling();
 
   return (
     <Spin tip="Carregando..." spinning={loading} style={{ height: 150 }}>
@@ -39,18 +38,18 @@ const Playlists = ({
         />
       )}
       <Row gutter={24}>
-        {playlists.filter(filterPlaylistByKeyword).map(({
+        {playlists.map(({
           id, name, images, tracks, external_urls: externalUrls,
         }) => (
           <Col key={id} xs={24} xl={8}>
-            <PlaylistCard
-              id={id}
-              name={name}
-              image={images[0].url}
-              tracks={tracks.total}
-              link={externalUrls.spotify}
-            />
-          </Col>
+              <PlaylistCard
+                id={id}
+                name={name}
+                image={images[0].url}
+                tracks={tracks.total}
+                link={externalUrls.spotify}
+              />
+            </Col>
         ))}
       </Row>
     </Spin>
@@ -59,16 +58,14 @@ const Playlists = ({
 
 Playlists.propTypes = {
   playlists: PropTypes.array.isRequired,
-  keyword: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = ({ playlists, filters }) => ({
-  playlists: playlists.playlists,
+  playlists: playlistsFilterSelector({ playlists, filters }),
   error: playlists.error,
   loading: playlists.loading,
-  keyword: filters.keyword,
 });
 
 export default connect(mapStateToProps)(Playlists);

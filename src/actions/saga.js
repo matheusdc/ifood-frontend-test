@@ -5,7 +5,7 @@ import {
 import * as TYPES from './types';
 
 import { getPlaylists } from '../services/SpotifyApi';
-import defaultFilters from '../components/defaultFilters';
+import defaultFilters from '../utils/defaultFilters';
 
 export function* workerGetPlaylists() {
   try {
